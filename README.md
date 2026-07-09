@@ -323,5 +323,154 @@ Hero ustunlari: .hero-col klassiga flex: 1 berilgani sababli, 3 ta blok kontent 
 Responsive dizayn: @media (max-width: 768px) ichida flex-direction: column qo'llanildi. Bu planshet va telefonlarda navbar elementlarini ham, hero ustunlarini ham chiroyli tarzda ustma-ust joylashtiradi.
 
 Masofalar: Elementlar orasidagi barcha bo'shliqlar uchun eski margin usulidan emas, zamonaviy va qulay gap xossasidan foydalanildi.
+HTML va CSS yordamida barcha semantik bo'limlar (thead, tbody, tfoot), qatlamli uslublar va so'ralgan funksiyalar qamrab olingan, toza va chiroyli jadval (table) kodi:
+
+HTML va CSS Kodu
+HTML
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chiroyli va Semantik Jadval</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    /* Konteyner - jadval katta bo'lsa, mobil ekranda skroll bo'lishi uchun */
+    .table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow-x: auto;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Asosiy jadval uslublari */
+    table {
+      width: 100%;
+      border-collapse: collapse; /* Chegaralarni birlashtirish */
+      text-align: left;
+    }
+
+    /* Padding va Border qoidalari */
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 15px;
+    }
+
+    /* Ustunlar bo'yicha matnni tekislash (Raqamlar o'ngga, matnlar chapga) */
+    .text-right {
+      text-align: right;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    /* thead uslubi */
+    thead {
+      background-color: #1e3a8a; /* To'q ko'k font */
+      color: #ffffff;
+    }
+
+    th {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Zebra striping - tr:nth-child(even) orqali juft qatorlarni bo'yash */
+    tbody tr:nth-child(even) {
+      background-color: #f1f5f9; /* Och kulrang/ko'kish fon */
+    }
+
+    /* Hover effect - tr:hover sichqoncha kelganda qatorni ajratib ko'rsatadi */
+    tbody tr:hover {
+      background-color: #e2e8f0;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    /* tfoot uslubi */
+    tfoot {
+      background-color: #f8fafc;
+      font-weight: 700; /* Qalin matn */
+      color: #1e3a8a;
+    }
+
+    tfoot td {
+      border-top: 2px solid #cbd5e1; /* Jami qismini ajratuvchi qalinroq chiziq */
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Mahsulot nomi</th>
+          <th>Tavsif</th>
+          <th class="text-right">Narxi</th>
+          <th class="text-center">Soni</th>
+          <th class="text-right">Jami</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Premium Noutbuk</td>
+          <td>16GB RAM, 512GB SSD, Kulrang Intel i7</td>
+          <td class="text-right">12 000 000 so'm</td>
+          <td class="text-center">2</td>
+          <td class="text-right">24 000 000 so'm</td>
+        </tr>
+        <tr>
+          <td>Simsiz Sichqoncha</td>
+          <td>Ergonomik dizayn, 2.4GHz Bluetooth</td>
+          <td class="text-right">250 000 so'm</td>
+          <td class="text-center">5</td>
+          <td class="text-right">1 250 000 so'm</td>
+        </tr>
+        <tr>
+          <td>Mexanik Klaviatura</td>
+          <td>RGB yoritgichli, Red switches</td>
+          <td class="text-right">800 000 so'm</td>
+          <td class="text-center">1</td>
+          <td class="text-right">800 000 so'm</td>
+        </tr>
+        <tr>
+          <td>UltraWide Monitor</td>
+          <td>27 dyuym, 144Hz IPS panel</td>
+          <td class="text-right">3 500 000 so'm</td>
+          <td class="text-center">2</td>
+          <td class="text-right">7 000 000 so'm</td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="4" class="text-right">Umumiy hisob (Jami):</td>
+          <td class="text-right">33 050 000 so'm</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</body>
+</html>
+Kod bo'yicha muhim eslatmalar:
+border-collapse: collapse: Agar bu xossa berilmasa, jadval katakchalari orasida yoqimsiz bo'shliqlar qolib ketadi va chegaralar (border) ikki qavat bo'lib ko'rinadi.
+
+colspan="4": tfoot ichidagi birinchi td katakchasiga berildi. U dastlabki 4 ta ustunni (Nom, Tavsif, Narx, Soni) bitta qilib birlashtiradi va oxirgi 5-ustun (Jami) o'z joyida to'g'ri hisob-kitobni ko'rsatib turadi.
+
+Zebra Striping (:nth-child(even)): Faqat tbody tr lariga berildi, toki bu uslub thead yoki tfoot bo'limlarining ranglariga taqalluq qilmasin.
 
 Moslashuvchanlik (Responsiveness): .main ichidagi display: flex va flex-wrap: wrap xossasi tufayli, sahifa planshet yoki telefonda ochilganda 3 ta ustun siqilib ketmasdan, bir-birining ostiga tartib bilan joylashadi.
